@@ -3,16 +3,18 @@ from datetime import date
 
 st.set_page_config(page_title="Checklist", layout="centered")
 
-# Pega o ticket da URL
+# Recuperar ticket da URL (caso venha do scanner)
 ticket_param = st.query_params.get("ticket", "")
 
 st.title("📋 Checklist com Scanner Externo")
 
+# Campo preenchido via URL
 ticket = st.text_input("Número do Ticket", value=ticket_param)
 
-if st.button("📷 Escanear Código"):
-    st.switch_page("pages/Scanner.py")
+# Botão que leva para a página do scanner
+st.markdown("[📷 Escanear Código](/Scanner)", unsafe_allow_html=True)
 
+# Demais campos
 colaborador = st.text_input("Colaborador")
 data = st.date_input("Data", value=date.today())
 
