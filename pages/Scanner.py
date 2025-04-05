@@ -5,7 +5,7 @@ st.set_page_config(page_title="Scanner", layout="centered")
 
 st.markdown("## 📷 Escaneie o código")
 
-# Scanner com redirecionamento após leitura
+# Scanner com redirecionamento correto para a tela principal
 components.html(
     """
     <script src="https://unpkg.com/html5-qrcode"></script>
@@ -16,7 +16,8 @@ components.html(
             { facingMode: { exact: "environment" } },
             { fps: 10, qrbox: 250 },
             function(decodedText) {
-                window.location.href = "/?ticket=" + encodeURIComponent(decodedText);
+                // Redirecionamento absoluto (sem empilhar)
+                window.top.location.href = window.origin + "/?ticket=" + encodeURIComponent(decodedText);
             },
             function(error) {}
         ).catch(err => {
